@@ -1,0 +1,88 @@
+/*
+Theme Name: Intentionally Blank
+Theme URI: https://www.nilovelez.com/blank/
+Author: Nilo Velez
+Author URI: https://www.nilovelez.com/
+Description: This theme was intentionally left blank. There are times when all you need is the WordPress dashboard and an blank frontend. You might be using the WordPress REST API as a backend for a mobile App or you might be a minimalism obsessed hipster. This is your theme.
+Version: 3.1.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: featured-images, custom-background, theme-options, translation-ready
+Text Domain: intentionally-blank
+Requires at least: 4.6
+Tested up to: 6.6
+Requires PHP: 7.4
+*/
+#header .site-title-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+#header .site-title a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+main {
+    width: 1000px;
+    margin: 0 auto;
+} 
+
+.slick-slide {
+    margin: 5px;
+    margin-top: 10px;
+}
+.slick-slide img {
+    object-fit: cover;
+}
+
+/* slick dots を水平方向・中央下に表示する */
+.slick-dots {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-direction: row !important;
+}
+.slick-dots li {
+  margin: 0 5px;
+}
+.slick-dots li button {
+  font-size: 0; /* 数字非表示にする */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+}
+.slick-dots li.slick-active button {
+  background: #333;
+}
+
+.top-banner img {
+  height: 300px; /* 必要に応じて調整 */
+  width: 100%;
+  object-fit: cover; /* 画像をトリミングしてバランスを取る */
+  display: block;
+}
+
+/* 矢印の位置 */
+.slick-prev {
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    z-index: 1;
+}
+.slick-next {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+}
