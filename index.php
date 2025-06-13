@@ -9,22 +9,38 @@ require_once (get_template_directory() . '/header.php');
 ?>
 <main>
    <!--大バナー-->
-   <?php 
-   $ids = array(59, 60, 61, 62, 63, 64); // 例：IDを直接指定
-   //$ids = array(53, 54, 55, 56, 57, 58); // 例：IDを直接指定
-   ?>
-   <section class="top-banner slider"> <!-- .slider というクラスをつけてslick対象に -->
-        <?php foreach ($ids as $id): ?>
-            <div><?php echo wp_get_attachment_image($id, 'medium'); ?></div>
-        <?php endforeach; ?>
-    </section>
+   <section class="top-banner">
+   <?php
+    $banners = SCF::get('banner', get_queried_object_id());
+
+    if (!empty($banners)) {
+        echo '<ul class="slider">';
+        foreach ($banners as $banner) {
+            $img_id = $banner['img'];
+            $url = $banner['url']; 
+
+            // 画像IDからURLを取得
+            $img_url = wp_get_attachment_image_url($img_id, 'full');
+
+            if ($img_url && $url) {
+                echo '<li><a href="' . esc_url($url) . '" target="_blank" rel="noopener">';
+                echo '<img src="' . esc_url($img_url) . '" alt="">';
+                echo '</a></li>';
+            }
+        }
+        echo '</ul>';
+    }
+    ?>
+   </section>
     <!--中バナー-->
     <section class="sub-banner">
     </section>
 
+    <!-- 本の一覧 -->
     <section id="book_list">
         <div>booklist</div>
     </section>
+
     <section id="book_list2">
         <div>booklist2</div>
     </section>

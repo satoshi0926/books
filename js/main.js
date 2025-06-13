@@ -20,7 +20,7 @@ $(function () {
     if(isMobile()) {
         isdots = false;
     }
-    $('.top-banner.slider').slick({
+    $('.slider').slick({
         autoplay: true,
     autoplaySpeed: 2400,
     slidesToShow: 3,

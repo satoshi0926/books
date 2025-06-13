@@ -78,11 +78,11 @@ main {
 .slick-prev {
     position: absolute;
     top: 50%;
-    left: 3px;
+    left: 52px;
     z-index: 1;
 }
 .slick-next {
     position: absolute;
     top: 50%;
-    right: 3px;
+    right: 10px;
 }
