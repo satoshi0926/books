@@ -107,6 +107,7 @@ main {
 .filter form {
     display: flex;
     justify-content: center;
+    padding-left: 30px;
 }
 .filter select {
     margin-right: 5px;
