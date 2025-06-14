@@ -6,18 +6,15 @@ $releasedate_list = get_eventvalue_list("release_date");
 
 // GETデータ取得
 $get_data = get_param();
-echo '<pre>';
-var_dump($get_data);
-echo '</pre>';
 
 // 絞り込み用配列生成
 $array_filter = get_array_filter($get_data);
 // 一覧表示用where句追加(今日より未来の発売日を表示)
 //array_push($array_filter, add_where_query());
 
-echo '<pre>';
-var_dump($array_filter);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($array_filter);
+// echo '</pre>';
 
 // 今日から３カ月先までの日付データ
 //$datelist_3month = get_3month_datelist();
