@@ -54,19 +54,19 @@ $array_filter = get_array_filter($get_data);
      <div class="filter">
         <form method="get" action="<?php echo esc_url(home_url('/result')); ?>">
             <select name="author" id="author" onchange="updateURLWithSelect('author')">
-            <option value="">作者を指定</option>
+            <option value="">作者を選択</option>
             <?php foreach($author_list as $value){
                 echo "<option value='" . esc_attr($value) . "' " . ($get_data['author'] === $value ? 'selected' : '') . ">{$value}</option>";
             } ?>
             </select>
             <select name="content_type" id="content_type" onchange="updateURLWithSelect('content_type')">
-            <option value="">本の種類を指定</option>
+            <option value="">本の種類を選択</option>
             <?php foreach($contenttype_list as $value){
                 echo "<option value='" . esc_attr($value) . "' " . ($get_data['content_type'] === $value ? 'selected' : '') . ">{$value}</option>";
             } ?>
             </select>
             <select name="release_date" id="release_date" onchange="updateURLWithSelect('release_date')">
-            <option value="">日付を指定</option>
+            <option value="">日付を選択</option>
             <?php foreach($releasedate_list as $value){
                 echo "<option value='" . esc_attr($value) . "' " . ($get_data['release_date'] === $value ? 'selected' : '') . ">".get_date_format($value)."</option>";
             } ?>
