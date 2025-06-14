@@ -109,7 +109,20 @@ main {
     justify-content: center;
 }
 .filter select {
-    width: 30%;
+    margin-right: 5px;
+}
+.filter select#author {
+    width: 25%;
+}
+.filter select#content_type {
+    width: 15%;
+}
+.filter select#release_date {
+    width: 25%;
+    margin-right: 15px;
+}
+.filter input#submit {
+    margin-right: 2px;
 }
 
 /* 投稿一覧 */
