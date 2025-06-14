@@ -1,0 +1,9 @@
+<?php
+get_header();
+?>
+<main>
+    投稿ページ
+</main>
+<?php
+get_footer();
+?>

@@ -1,21 +1,7 @@
 /* スライド */
-
-// $(window).on('load', function(){
-//   $('.top-banner ul').slick({
-//     autoplay: true,
-//     autoplaySpeed: 1800,
-//     slidesToShow: 3,
-//     arrows: true,
-//     dots: isdots,
-//     pauseOnFocus: false,
-//     pauseOnHover: false,
-//     pauseOnDotsHover: false,
-//   });
-// });
-
 $(function () {
 
-    let isdots = true;
+   let isdots = true;
     // スマホの時はドットを非表示にする
     if(isMobile()) {
         isdots = false;
@@ -32,13 +18,6 @@ $(function () {
     pauseOnHover: false,
     pauseOnDotsHover: false,
     });
-
-    // $('.sub-banner ul').slick({
-    //     autoplay: true,
-    //     autoplaySpeed: 1000,
-    //     slidesToShow: 3,
-    //     arrows: true,
-    // })
 });
 
 /* モバイル判定 */
@@ -65,3 +44,51 @@ function updateURLWithSelect(selectType) {
     // 更新されたURLにリダイレクト
     window.location.href = url.toString();
 }
+
+/* 投稿情報の取得 */
+function getFilteredPosts() {
+    return allPosts.filter(post => {
+        return (
+        (!$author.value || post.author === $author.value) &&
+        (!$type.value || post.type === $type.value) &&
+        (!$date.value || post.date === $date.value)
+        );
+    });
+}
+// 各セレクトボックスの値を書き換え
+function updateOptions($select, values, currentValue) {
+    $select.innerHTML = '<option value="">--選択--</option>';
+    [...new Set(values)].sort().forEach(val => {
+        const selected = (val === currentValue) ? ' selected' : '';
+        $select.innerHTML += `<option value="${val}"${selected}>${val}</option>`;
+    });
+}
+// セレクトボックスの切り替え処理
+function updateAllSelects() {
+    const filtered = getFilteredPosts();
+
+    const authors = filtered.map(p => p.author);
+    const types   = filtered.map(p => p.type);
+    const dates   = filtered.map(p => p.date);
+
+    updateOptions($author, authors, $author.value);
+    updateOptions($type, types, $type.value);
+    updateOptions($date, dates, $date.value);
+}
+document.addEventListener('DOMContentLoaded', function () {
+  const allPosts = window.allPosts;
+
+//  console.log(allPosts);
+
+  const $author = document.querySelector('#author');
+  const $type   = document.querySelector('#content_type');
+  const $date   = document.querySelector('#release_date');
+
+  // 初期化
+  updateAllSelects();
+
+  // 各セレクト変更時に判定処理を実行する
+  [$author, $type, $date].forEach($el => {
+    $el.addEventListener('change', updateAllSelects);
+  });
+});

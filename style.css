@@ -13,11 +13,23 @@ Requires at least: 4.6
 Tested up to: 6.6
 Requires PHP: 7.4
 */
+html,body{
+    margin:0
+}
+.site-title-bg{background:rgba(0,0,0,0.5);color:#fff;padding:5px;text-align:center}
+.site-title h1,.site-title p{font-size:16px;display:inline-block;padding:5px 0 5px 5px;margin:0}
+.site-title h1 a{color:#fff;font-weight:700;text-decoration:none}
+
+
 #header .site-title-bg {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 80px;
+    background:rgba(0,0,0,0.5);
+    color:#fff;
+    padding:5px;
+    text-align:center
 }
 #header .site-title a {
     color: #fff;
@@ -30,6 +42,7 @@ main {
     margin: 0 auto;
 } 
 
+/* バナー関連 */
 .slick-slide {
     margin: 5px;
     margin-top: 10px;
@@ -85,4 +98,91 @@ main {
     position: absolute;
     top: 50%;
     right: 10px;
+}
+
+/* 絞り込み */
+.filter {
+    padding: 60px 0px;
+}
+.filter form {
+    display: flex;
+    justify-content: center;
+}
+.filter select {
+    width: 30%;
+}
+/* 投稿一覧 */
+ul.book-list {
+    margin-bottom: 80px;
+}
+.book-item {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #333;
+    padding: 0 30px;
+}
+.book-item .icon {
+    width: 200px; /* 固定サイズ推奨 */
+    flex-shrink: 0; /* 縮まないように */
+    padding-top: 20px;
+}
+.book-item .icon img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+.book-item .icon p {
+    text-align: center;
+}
+
+.book-item .book-info {
+    flex: 1; /* 残り幅いっぱい使う */
+    margin-left: 30px;
+    padding: 30px 0;
+    line-height: 1.6em;
+}
+.book-info dl div {
+    display: flex;
+}
+.book-info dt {
+    width: 100px;
+}
+.book-info dd {
+    margin-inline-start: 20px;
+}
+.book-info .posted-text {
+    margin: 10px 0;
+}
+
+/* 種類 */
+.paperback {
+    background-color: #c56601;
+    
+}
+.hardcover {
+    background-color: #56842a;
+}
+
+/* 値引き額 */
+.discount dd.price {
+    text-decoration: line-through;
+}
+.discount dd.discounted-price {
+    margin-left: 10px; 
+    color: #e53935; 
+    font-weight: bold;
+}
+
+/* footer */
+#footer{
+    width:100%;
+    padding:10px 0;
+    text-align:center;
+    background-color:rgba(241,241,241,0.4)
+}
+#footer a{
+    text-decoration:none; 
+    color: #333;
 }

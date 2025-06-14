@@ -53,6 +53,17 @@ if ( ! is_admin() ) {
 		}
 	);
 }
+
+/**
+* Checkbox sanitization function
+* @param bool $checked Whether the checkbox is checked.
+* @return bool Whether the checkbox is checked.
+*/
+function blank_sanitize_checkbox( $checked ) {
+    // Returns true if checkbox is checked.
+    return ( ( isset( $checked ) && true === $checked ) ? true : false );
+}
+
 /**
  * Sets up theme defaults and registers the various WordPress features that
  * this theme supports.
@@ -80,16 +91,6 @@ function blank_customize_register( $wp_customize ) {
 		)
 	);
 
-	/**
-	 * Checkbox sanitization function
-
-	 * @param bool $checked Whether the checkbox is checked.
-	 * @return bool Whether the checkbox is checked.
-	 */
-	function blank_sanitize_checkbox( $checked ) {
-		// Returns true if checkbox is checked.
-		return ( ( isset( $checked ) && true === $checked ) ? true : false );
-	}
 	$wp_customize->add_setting(
 		'blank_show_copyright',
 		array(
@@ -120,8 +121,268 @@ function blank_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'blank_customize_register', 100 );
 
+// headタグのmetaタグ設定用
+function custom_add_meta_tags() {
+    if (is_front_page()) {
+        // トップページ
+        echo '<meta name="description" content="幻想書架オンラインは、○○な作品を紹介するサイトです。">' . "\n";
+        echo '<meta property="og:image" content="' . get_template_directory_uri() . '/ogp.jpg">' . "\n";
+    } elseif (is_singular()) {
+        // 投稿や固定ページ
+        global $post;
+        $desc = get_the_excerpt($post) ?: get_bloginfo('description');
+        $title = get_the_title($post);
+        $url = get_permalink($post);
+        echo '<meta name="description" content="' . esc_attr($desc) . '">' . "\n";
+        echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+        echo '<meta property="og:description" content="' . esc_attr($desc) . '">' . "\n";
+        echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+        echo '<meta property="og:image" content="' . get_template_directory_uri() . '/ogp.jpg">' . "\n"; // 共通画像（必要に応じて分岐）
+    }
+}
+add_action('wp_head', 'custom_add_meta_tags');
 
+// スタイルシート読み込み
 function my_enqueue_styles() {
     wp_enqueue_style('main-style', get_stylesheet_uri());
 }
 add_action('wp_enqueue_scripts', 'my_enqueue_styles');
+
+// スマホか判定する
+function is_mobile() {
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    
+    // モバイルデバイスのユーザーエージェントに一致するパターンを指定
+    $mobile_agents = [
+        'iPhone', 
+        'Android', 
+        'webOS', 
+        'BlackBerry', 
+        'iPod', 
+        'Opera Mini', 
+        'IEMobile'
+    ];
+    
+    // ユーザーエージェントがモバイルデバイスかチェック
+    foreach ($mobile_agents as $device) {
+        if (stripos($user_agent, $device) !== false) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// GETパラメータ取得用
+function get_param() {
+    $param = array(
+        "author" => "",
+        "release_date" => "",
+        "content_type" => "",
+    );
+
+    if ( isset($_GET['author']) ) {
+        $param['author'] = sanitize_text_field($_GET['author']);
+    }
+    if ( isset($_GET['release_date']) ) {
+        $param['release_date'] = sanitize_text_field($_GET['release_date']);
+    }
+    if ( isset($_GET['content_type']) ) {
+        $param['content_type'] = sanitize_text_field($_GET['content_type']);
+    }
+
+    
+    return $param;
+}
+
+
+// 日付の形式を整える　年/月/日（曜日）
+function get_date_format_week($date_text) {
+
+    $date = DateTime::createFromFormat('Ymd', $date_text);
+    $formattedDate = $date->format('Y年m月d日(l)');
+
+    // 曜日を日本語に変換
+    $days = [
+        'Sunday' => '日',
+        'Monday' => '月',
+        'Tuesday' => '火',
+        'Wednesday' => '水',
+        'Thursday' => '木',
+        'Friday' => '金',
+        'Saturday' => '土'
+    ];
+
+    $formattedDate = str_replace(array_keys($days), array_values($days), $formattedDate);
+
+    return $formattedDate;
+}
+// 日付の形式を整える　年/月/日
+function get_date_format($date_text) {
+
+    $date = DateTime::createFromFormat('Ymd', $date_text);
+    $formattedDate = $date->format('Y/m/d');
+
+    return $formattedDate;
+}
+
+// アイコン画像のid取得
+function get_icon_id($keyword){
+    $img_name_list = array(
+        "ノーマル" => 45,
+        "本棚" => 46,
+        "積み重ね" => 44,
+        "積み重ね_雑" => 47,
+    );
+
+     // キーが存在するかチェック
+    if (array_key_exists($keyword, $img_name_list)) {
+        return $img_name_list[$keyword];
+    } else {
+        // 存在しない場合は0を返す
+        return 0;
+    }
+}
+
+// フィルターの配列を生成
+function get_array_filter($data){
+    $array_filter = array(
+        "relation" => "AND",
+    );
+
+    $array_filter['author'] = array(
+        'key'     => 'author'
+    );
+    if(!empty($data['author'])){
+        $array_filter['author'] += array(
+            'value'   => $data['author'],
+            'compare' => '=',
+            'type'    => 'CHAR',
+        );
+    }
+    $array_filter['release_date'] = array(
+        'key'     => 'release_date'
+    );
+    if(!empty($data['release_date'])){
+        $array_filter['release_date'] += array(
+            'value'   => $data['release_date'],
+            'compare' => '=',
+            'type'    => 'NUMERIC',
+        );
+    }
+    $array_filter['content_type'] = array(
+        'key'     => 'content_type'
+    );
+    if(!empty($data['content_type'])){
+        $array_filter['content_type'] += array(
+            'value'   => $data['content_type'],
+            'compare' => '=',
+            'type'    => 'CHAR',
+        );
+    }
+
+    // ソート用
+    $array_filter['content_name_kana'] = array(
+        'key'     => 'content_name_kana'
+    );
+
+    return $array_filter;
+}
+// 一覧表示のwhere句に追加する情報を返す
+function add_where_query(){
+    $today = date('Ymd');
+    $where_array = array(
+        'key' => 'release_date',       // 日付が保存されているカスタムフィールドのキー
+        'value' => $today,
+        'compare' => '>=',
+        'type' => 'CHAR',
+    );
+    
+    return $where_array;
+}
+
+// イベント情報の一覧を取得
+function get_eventvalue_list($meta_key){
+
+    global $wpdb;
+
+    $result = $wpdb->get_col( $wpdb->prepare(
+        "
+        SELECT DISTINCT meta_value
+        FROM {$wpdb->posts} p 
+        INNER JOIN {$wpdb->postmeta} pm 
+        ON p.ID = pm.post_id
+        WHERE p.post_status = 'publish'
+        AND p.post_type = 'post' 
+        AND pm.meta_key = '%s'
+        ORDER BY pm.meta_value
+        ",
+        $meta_key
+    ) );
+
+    return $result;
+}
+
+// 今日から３カ月先までの日付を返す
+function get_3month_datelist() {
+   // 今日の日付を取得
+    $startDate = new DateTime();
+    $endDate = new DateTime('+3 months');
+
+    // 日付データを格納する配列
+    $dateArray = [];
+
+    // 日付を1日ずつ追加するためのループ
+    while ($startDate <= $endDate) {
+        // 配列に日付を追加 (Y-m-dの形式)
+        $dateArray[] = $startDate->format('Ymd');
+        
+        // 1日を追加
+        $startDate->modify('+1 day');
+    }
+
+   return $dateArray;
+}
+
+// ページ情報を取得
+function get_pagelinks($wp_query){
+    $big = 999999999; // need an unlikely integer
+    $paged = max(get_query_var('paged',1),1);
+    $args = array(
+        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'total' => $wp_query->max_num_pages /*全ページ数 */ ,
+        'current' =>  $paged/*現在のページ数*/,
+        'show_all' => FALSE,
+        'end_size' => 1,
+        'mid_size' => 2,
+        'prev_next' => FALSE,
+        'type' => 'array',
+    );
+    return paginate_links($args);
+}
+
+// 値引き後の価格を計算
+function calc_discounted_price($price, $discount) {
+    // 例: 200円OFF, 200円 off, 200円OFF
+    if (preg_match('/(\d+)\s*円?[\s\-]*OFF/i', $discount, $matches)) {
+        return $price - intval($matches[1]);
+    }
+    // 例: 20%OFF, 20% off, 20％OFF
+    if (preg_match('/(\d+)\s*[%％][\s\-]*OFF/i', $discount, $matches)) {
+        $percent = intval($matches[1]);
+        return floor($price * (1 - $percent / 100));
+    }
+    return $price;
+}
+
+// 文字数を区切る
+function trim_text($text, $length = 150, $suffix = '...') {
+    // マルチバイト対応で文字数を計算
+    if (mb_strlen($text, 'UTF-8') > $length) {
+        // 指定文字数で切り取り、末尾に「...」を追加
+        return mb_substr($text, 0, $length, 'UTF-8') . $suffix;
+    } else {
+        // 指定文字数以下ならそのまま返す
+        return $text;
+    }
+}
