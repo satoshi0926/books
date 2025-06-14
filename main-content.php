@@ -121,7 +121,7 @@ $array_filter = get_array_filter($get_data);
             echo '</div>';
             echo '<div class="book-info">';
             echo '<dl>';
-            echo '<div><dt>作品名:</dt><dd>' . esc_html($content_name) . '</dd></div>';
+            echo '<div class="author"><dt>作品名:</dt><dd><a href="'.get_permalink().'">' . esc_html($content_name) . '</a></dd></div>';
             echo '<div><dt>作者:</dt><dd>' . esc_html($author) . '</dd></div>';
             
             // 本の紹介

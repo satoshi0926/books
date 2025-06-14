@@ -147,6 +147,10 @@ ul.book-list {
     height: auto;
     display: block;
 }
+.book-item .icon img:hover {
+    filter: brightness(1.4); /* ← 1.0 より大きいと明るくなる */
+    transition: filter 0.3s ease; /* アニメーションも追加すると滑らか */
+}
 .book-item .icon p {
     text-align: center;
 }
@@ -159,6 +163,14 @@ ul.book-list {
 }
 .book-info dl div {
     display: flex;
+}
+.book-info div.author a {
+    text-decoration: none;
+    color: #000;
+}
+.book-info div.author a:hover {
+    text-decoration: underline;
+    color: cadetblue;
 }
 .book-info dt {
     width: 100px;
