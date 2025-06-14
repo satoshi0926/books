@@ -92,4 +92,12 @@ document.addEventListener('DOMContentLoaded', function () {
   [$author, $type, $date].forEach($el => {
     $el.addEventListener('change', updateAllSelects);
   });
+
+  // 🔁 リセット処理
+  document.querySelector('#reset').addEventListener('click', function () {
+    $author.value = '';
+    $type.value = '';
+    $date.value = '';
+    updateAllSelects();
+  });
 });
