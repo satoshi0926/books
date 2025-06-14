@@ -111,6 +111,7 @@ main {
 .filter select {
     width: 30%;
 }
+
 /* 投稿一覧 */
 ul.book-list {
     margin-bottom: 80px;
