@@ -137,6 +137,9 @@ ul.book-list {
     border-top: 1px solid #333;
     padding: 0 30px;
 }
+.book-item:last-child {
+    border-bottom: 1px solid #333;
+}
 .book-item .icon {
     width: 200px; /* 固定サイズ推奨 */
     flex-shrink: 0; /* 縮まないように */
