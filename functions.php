@@ -289,17 +289,17 @@ function get_array_filter($data){
     return $array_filter;
 }
 // 一覧表示のwhere句に追加する情報を返す
-function add_where_query(){
-    $today = date('Ymd');
-    $where_array = array(
-        'key' => 'release_date',       // 日付が保存されているカスタムフィールドのキー
-        'value' => $today,
-        'compare' => '>=',
-        'type' => 'CHAR',
-    );
+// function add_where_query(){
+//     $today = date('Ymd');
+//     $where_array = array(
+//         'key' => 'release_date',       // 日付が保存されているカスタムフィールドのキー
+//         'value' => $today,
+//         'compare' => '>=',
+//         'type' => 'CHAR',
+//     );
     
-    return $where_array;
-}
+//     return $where_array;
+// }
 
 // イベント情報の一覧を取得
 function get_eventvalue_list($meta_key){
@@ -324,42 +324,42 @@ function get_eventvalue_list($meta_key){
 }
 
 // 今日から３カ月先までの日付を返す
-function get_3month_datelist() {
-   // 今日の日付を取得
-    $startDate = new DateTime();
-    $endDate = new DateTime('+3 months');
+// function get_3month_datelist() {
+//    // 今日の日付を取得
+//     $startDate = new DateTime();
+//     $endDate = new DateTime('+3 months');
 
-    // 日付データを格納する配列
-    $dateArray = [];
+//     // 日付データを格納する配列
+//     $dateArray = [];
 
-    // 日付を1日ずつ追加するためのループ
-    while ($startDate <= $endDate) {
-        // 配列に日付を追加 (Y-m-dの形式)
-        $dateArray[] = $startDate->format('Ymd');
+//     // 日付を1日ずつ追加するためのループ
+//     while ($startDate <= $endDate) {
+//         // 配列に日付を追加 (Y-m-dの形式)
+//         $dateArray[] = $startDate->format('Ymd');
         
-        // 1日を追加
-        $startDate->modify('+1 day');
-    }
+//         // 1日を追加
+//         $startDate->modify('+1 day');
+//     }
 
-   return $dateArray;
-}
+//    return $dateArray;
+// }
 
 // ページ情報を取得
-function get_pagelinks($wp_query){
-    $big = 999999999; // need an unlikely integer
-    $paged = max(get_query_var('paged',1),1);
-    $args = array(
-        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-        'total' => $wp_query->max_num_pages /*全ページ数 */ ,
-        'current' =>  $paged/*現在のページ数*/,
-        'show_all' => FALSE,
-        'end_size' => 1,
-        'mid_size' => 2,
-        'prev_next' => FALSE,
-        'type' => 'array',
-    );
-    return paginate_links($args);
-}
+// function get_pagelinks($wp_query){
+//     $big = 999999999; // need an unlikely integer
+//     $paged = max(get_query_var('paged',1),1);
+//     $args = array(
+//         'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+//         'total' => $wp_query->max_num_pages /*全ページ数 */ ,
+//         'current' =>  $paged/*現在のページ数*/,
+//         'show_all' => FALSE,
+//         'end_size' => 1,
+//         'mid_size' => 2,
+//         'prev_next' => FALSE,
+//         'type' => 'array',
+//     );
+//     return paginate_links($args);
+// }
 
 // 値引き後の価格を計算
 function calc_discounted_price($price, $discount) {

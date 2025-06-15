@@ -127,9 +127,6 @@ main {
 }
 
 /* 投稿一覧 */
-ul.book-list {
-    margin-bottom: 80px;
-}
 .book-item {
     list-style: none;
     display: flex;
@@ -203,6 +200,27 @@ ul.book-list {
     margin-left: 10px; 
     color: #e53935; 
     font-weight: bold;
+}
+
+/* ページネーション */
+.pager {
+    text-align: center;
+    margin: 40px 0
+}
+.pager a, .pager span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #999;
+    border-radius: 10px;
+    padding-top: 5px;
+}
+.pager a {
+    text-decoration: none;
+}
+.pager span.current {
+    background-color: #555;
+    color: #fff;
 }
 
 /* footer */

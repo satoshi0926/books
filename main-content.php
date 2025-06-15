@@ -77,6 +77,11 @@ $array_filter = get_array_filter($get_data);
     </div>
     <!-- 投稿一覧 -->
     <?php
+    // 現在のページ番号の取得
+    if ( get_query_var('paged') ) { $paged = get_query_var('paged'); }
+    elseif ( get_query_var('page') ) { $paged = get_query_var('page'); }
+    else { $paged = 1; }
+
     $args = array(
         'post_type' => 'post',        // 投稿タイプ
         'post_status'    => 'publish', // 公開中のデータ
@@ -90,9 +95,9 @@ $array_filter = get_array_filter($get_data);
 
     );
 
-    echo '<ul class="book-list">';
     $the_query = new WP_Query($args);
     if ($the_query->have_posts()) :
+        echo '<ul class="book-list">';
         while ($the_query->have_posts()) : $the_query->the_post();
             $post_id = get_the_ID();
             $icon_no = SCF::get('icon', $post_id);
@@ -151,11 +156,32 @@ $array_filter = get_array_filter($get_data);
 
             echo '</li>';
         endwhile;
+        echo '</ul>';
+
+        /* ページ間引継ぎ用パラメータ */
+        $query_args = array(
+            'author' => $get_data['author'],
+            'content_type' => $get_data['content_type'],
+            'release_date' => $get_data['release_date'],
+        );
+        // ページネーション
+        $args = array(
+            'base' => add_query_arg('paged', '%#%'),
+            'total' => $the_query->max_num_pages, /*全ページ数 */
+            'current' =>  $paged, /* 現在のページ数 */
+            'show_all' => FALSE,
+            'end_size' => 1,
+            'mid_size' => 2,
+            'prev_text' => '«',
+            'next_text' => '»',
+            'add_args' => $query_args, // 引継ぎ用GETパラメータ設定
+        );
+        echo '<div class="pager">'.paginate_links($args)."</div>";
+
         wp_reset_postdata();
     else :
         echo '<p>投稿はまだありません。</p>';
     endif;
-    echo '</ul>';
     ?>
     </section>
 
