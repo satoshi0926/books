@@ -302,7 +302,7 @@ function get_array_filter($data){
 // }
 
 // イベント情報の一覧を取得
-function get_eventvalue_list($meta_key){
+function get_value_list($meta_key){
 
     global $wpdb;
 

@@ -1,8 +1,8 @@
 <?php
 // プルダウン用のデータを取得
-$contenttype_list = get_eventvalue_list("content_type");
-$author_list = get_eventvalue_list("author");
-$releasedate_list = get_eventvalue_list("release_date");
+$contenttype_list = get_value_list("content_type");
+$author_list = get_value_list("author");
+$releasedate_list = get_value_list("release_date");
 
 // GETデータ取得
 $get_data = get_param();
