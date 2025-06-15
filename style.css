@@ -223,6 +223,16 @@ main {
     color: #fff;
 }
 
+/* 記事ページ用 */
+section#main-content {
+    padding-top: 10px;
+}
+img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* footer */
 #footer{
     width:100%;
