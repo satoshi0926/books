@@ -323,44 +323,6 @@ function get_eventvalue_list($meta_key){
     return $result;
 }
 
-// 今日から３カ月先までの日付を返す
-// function get_3month_datelist() {
-//    // 今日の日付を取得
-//     $startDate = new DateTime();
-//     $endDate = new DateTime('+3 months');
-
-//     // 日付データを格納する配列
-//     $dateArray = [];
-
-//     // 日付を1日ずつ追加するためのループ
-//     while ($startDate <= $endDate) {
-//         // 配列に日付を追加 (Y-m-dの形式)
-//         $dateArray[] = $startDate->format('Ymd');
-        
-//         // 1日を追加
-//         $startDate->modify('+1 day');
-//     }
-
-//    return $dateArray;
-// }
-
-// ページ情報を取得
-// function get_pagelinks($wp_query){
-//     $big = 999999999; // need an unlikely integer
-//     $paged = max(get_query_var('paged',1),1);
-//     $args = array(
-//         'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-//         'total' => $wp_query->max_num_pages /*全ページ数 */ ,
-//         'current' =>  $paged/*現在のページ数*/,
-//         'show_all' => FALSE,
-//         'end_size' => 1,
-//         'mid_size' => 2,
-//         'prev_next' => FALSE,
-//         'type' => 'array',
-//     );
-//     return paginate_links($args);
-// }
-
 // 値引き後の価格を計算
 function calc_discounted_price($price, $discount) {
     // 例: 200円OFF, 200円 off, 200円OFF

@@ -12,12 +12,6 @@ $array_filter = get_array_filter($get_data);
 // 一覧表示用where句追加(今日より未来の発売日を表示)
 //array_push($array_filter, add_where_query());
 
-// echo '<pre>';
-// var_dump($array_filter);
-// echo '</pre>';
-
-// 今日から３カ月先までの日付データ
-//$datelist_3month = get_3month_datelist();
 ?>
 <main>
    <!--大バナー-->

@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $el.addEventListener('change', updateAllSelects);
   });
 
-  // 🔁 リセット処理
+  // リセット処理
   document.querySelector('#reset').addEventListener('click', function () {
     $author.value = '';
     $type.value = '';
