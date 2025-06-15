@@ -39,9 +39,6 @@ $array_filter = get_array_filter($get_data);
     }
     ?>
    </section>
-    <!--中バナー-->
-    <section class="sub-banner">
-    </section>
 
     <!-- 本の一覧 -->
     <section id="books">
