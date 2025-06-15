@@ -34,16 +34,18 @@ function updateURLWithSelect(selectType) {
     // モバイルでなければ何もしない
     if (!isMobile()) return;
     
-    // 現在のURLを取得
-    const url = new URL(window.location.href);
-    
-    // `<select>` ボックスの値を取得
-    const selectBox = document.getElementById(selectType);
-    const selectedValue = selectBox.value;
-    
-    // GETパラメータを更新または追加
-    url.searchParams.set(selectType, selectedValue);
-    
-    // 更新されたURLにリダイレクト
-    window.location.href = url.toString();
+    const baseUrl = window.location.origin + "/result";
+    const params = new URLSearchParams();
+
+    // 各セレクトボックスの値を収集してパラメータに追加
+    const keys = ['author', 'content_type', 'release_date'];
+    keys.forEach(key => {
+        const value = document.getElementById(key)?.value;
+        if (value) {
+            params.set(key, value);
+        }
+    });
+
+    // リダイレクト
+    window.location.href = `${baseUrl}?${params.toString()}`;
 }
