@@ -2,15 +2,17 @@
 $(function () {
 
    let isdots = true;
+   let slide = 3;
     // スマホの時はドットを非表示にする
     if(isMobile()) {
         isdots = false;
+        slide = 1
     }
     $('.slider').slick({
       autoplay: true,
       autoplaySpeed: 2400,
-      slidesToShow: 3,
-      arrows: true,
+      slidesToShow: slide,
+      arrows: isdots,
       prevArrow: '<button type="button" class="slick-prev"><</button>',
       nextArrow: '<button type="button" class="slick-next">></button>',
       dots: isdots,

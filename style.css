@@ -248,3 +248,71 @@ img.aligncenter {
     text-decoration:none; 
     color: #333;
 }
+
+/* 959px以下に適用されるCSS（タブレット用） */
+@media screen and (max-width: 959px) {
+	
+}
+
+/* 480px以下に適用されるCSS（スマホ用） */
+@media screen and (max-width: 480px) {
+
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        overflow-x: hidden; /* 横スクロールを無効にする例 */
+    }
+    main {
+        width: 96%;
+    }
+
+    ul.slider {
+        padding-left: 0;
+    }
+    .top-banner img {
+        height: 300px;
+    }
+
+    section#books {
+        width: 94%;
+        padding: 0 4%;
+        margin-bottom: 70px;
+    }
+
+    .filter form {
+        padding: 0;
+    }
+    .filter select#author {
+        width: 30%;
+    }
+    .filter select#content_type {
+        width: 30%;
+    }   
+    .filter select#release_date {
+        width: 30%;
+    }   
+    input#submit {
+        display: none;
+    }
+
+    ul.book-list {
+        padding-left: 0;
+    }
+    .book-item {
+        padding: 0 6%;
+    }
+    .book-item .icon {
+        width: 40%;
+    }
+    .book-item .book-info {
+        margin-left: 2px;
+    }
+    .book-info dt {
+        display: none;
+    }
+    .book-info .posted-text {
+        display: none;
+    }
+}

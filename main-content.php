@@ -64,7 +64,6 @@ $array_filter = get_array_filter($get_data);
             } ?>
             </select>
             <input id="submit" type="submit" value="検索">
-            <input id="reset" type="button" value="リセット">
         </form>
     </div>
     <!-- 投稿一覧 -->
