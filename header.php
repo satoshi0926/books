@@ -10,7 +10,6 @@ $blank_description = get_bloginfo( 'description', 'display' );
 <?php wp_head(); ?>
 <!-- スライダー用 -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-</head>
 
 <body <?php body_class(); ?>><?php wp_body_open(); ?><div id="page">
 <header id="header">

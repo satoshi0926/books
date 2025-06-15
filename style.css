@@ -38,7 +38,7 @@ html,body{
 }
 
 main {
-    width: 1000px;
+    width: 1400px;
     margin: 0 auto;
 } 
 
@@ -50,7 +50,6 @@ main {
 .slick-slide img {
     object-fit: cover;
 }
-
 /* slick dots を水平方向・中央下に表示する */
 .slick-dots {
   position: absolute;
@@ -81,7 +80,7 @@ main {
 }
 
 .top-banner img {
-  height: 300px; /* 必要に応じて調整 */
+  height: 400px; /* 必要に応じて調整 */
   width: 100%;
   object-fit: cover; /* 画像をトリミングしてバランスを取る */
   display: block;
@@ -100,6 +99,11 @@ main {
     right: 10px;
 }
 
+/* 本の情報 */
+section#books {
+    width: 1000px;
+    margin: 0 auto;
+}
 /* 絞り込み */
 .filter {
     padding: 60px 0px;

@@ -7,16 +7,17 @@ $(function () {
         isdots = false;
     }
     $('.slider').slick({
-        autoplay: true,
-    autoplaySpeed: 2400,
-    slidesToShow: 3,
-    arrows: true,
-    prevArrow: '<button type="button" class="slick-prev"><</button>',
-    nextArrow: '<button type="button" class="slick-next">></button>',
-    dots: isdots,
-    pauseOnFocus: false,
-    pauseOnHover: false,
-    pauseOnDotsHover: false,
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToShow: 3,
+      arrows: true,
+      prevArrow: '<button type="button" class="slick-prev"><</button>',
+      nextArrow: '<button type="button" class="slick-next">></button>',
+      dots: isdots,
+      pauseOnFocus: false,
+      pauseOnHover: false,
+      pauseOnDotsHover: false,
+      accessibility: false
     });
 });
 
@@ -49,7 +50,7 @@ function updateURLWithSelect(selectType) {
 document.addEventListener('DOMContentLoaded', function () {
   const allPosts = window.allPosts;
 
-  console.log(allPosts);
+  //console.log(allPosts);
 
   const $author = document.querySelector('#author');
   const $type   = document.querySelector('#content_type');
@@ -101,3 +102,4 @@ document.addEventListener('DOMContentLoaded', function () {
     updateAllSelects();
   });
 });
+

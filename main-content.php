@@ -16,6 +16,7 @@ $array_filter = get_array_filter($get_data);
 <main>
    <!--大バナー-->
    <section class="top-banner">
+
    <?php
     $banners = SCF::get('banner', get_option('page_on_front'));
 
