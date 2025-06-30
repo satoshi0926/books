@@ -23,6 +23,9 @@ html,body{
 #header .back-to-top {
     margin: 4px 10px;
 }
+#header .back-to-top a {
+    text-decoration: none;
+}
 #header .site-title-bg {
     display: flex;
     align-items: center;
