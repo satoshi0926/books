@@ -13,7 +13,7 @@ $array_filter = get_array_filter($get_data);
 //array_push($array_filter, add_where_query());
 
 ?>
-<main>
+<main class="main-content">
    <!--大バナー-->
    <section class="top-banner">
 

@@ -1,8 +1,13 @@
 <?php
 get_header();
 ?>
-<main>
+<main class="single">
     <section id="main-content">
+    <?php
+    if ( function_exists('yoast_breadcrumb') ) {
+    yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+    }
+    ?>
     <?php
     if ( have_posts() ) {
         // 投稿データをセットアップ

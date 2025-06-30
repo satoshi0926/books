@@ -38,6 +38,9 @@ html,body{
 }
 
 main {
+    padding: 0 4%;
+}
+main.main-content {
     width: 1400px;
     margin: 0 auto;
 } 
@@ -264,8 +267,11 @@ img.aligncenter {
     body {
         overflow-x: hidden; /* 横スクロールを無効にする例 */
     }
-    main {
-        width: 96%;
+    main.main-content {
+        width: 94%;
+    }
+    main.main.main-content {
+        padding: 0; 
     }
 
     ul.slider {
