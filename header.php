@@ -1,8 +1,3 @@
-<?php
-
-$blank_description = get_bloginfo( 'description', 'display' );
-
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>><head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -13,10 +8,12 @@ $blank_description = get_bloginfo( 'description', 'display' );
 
 <body <?php body_class(); ?>><?php wp_body_open(); ?><div id="page">
 <header id="header">
+	<div class="back-to-top">
+  		<a href="https://satoshi-creative.com/">← ポートフォリオのトップへ戻る</a>
+	</div>
 	<div class="site-title">
 		<div class="site-title-bg">
 			<h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<p class="site-description"><?php echo esc_html( $blank_description ); ?></p>
 		</div>
 	</div>
 </header>
