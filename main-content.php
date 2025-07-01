@@ -31,7 +31,7 @@ $array_filter = get_array_filter($get_data);
 
             if ($img_url && $url) {
                 echo '<li><a href="' . esc_url($url) . '" target="_blank" rel="noopener">';
-                echo '<img src="' . esc_url($img_url) . '" alt="">';
+                echo '<img src="' . esc_url($img_url) . '" alt="" loading="lazy">';
                 echo '</a></li>';
             }
         }
@@ -105,7 +105,7 @@ $array_filter = get_array_filter($get_data);
             // アイコン
             $img_url = wp_get_attachment_url(get_icon_id($icon_no));
             echo '<div class="icon">';
-            echo '<a href="'.get_permalink().'"><img src="'.esc_attr($img_url).'"></a>';
+            echo '<a href="'.get_permalink().'"><img src="'.esc_attr($img_url).'" loading="lazy"></a>';
 
             // 本の書類
             $content_type_style = match($content_type) {
