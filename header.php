@@ -8,8 +8,9 @@
 
 <body <?php body_class(); ?>><?php wp_body_open(); ?><div id="page">
 <header id="header">
-	<div class="back-to-top">
-  		<a href="https://satoshi-creative.com/">← ポートフォリオのトップへ戻る</a>
+	<div class="links">
+  		<a href="https://satoshi-creative.com/" class="top-btn">← ポートフォリオのトップへ戻る</a>
+		<a href="https://github.com/satoshi0926/books" class="github-btn" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/github-icon.svg" alt="GitHub">GitHubリンク</a>
 	</div>
 	<div class="site-title">
 		<div class="site-title-bg">

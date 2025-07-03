@@ -20,12 +20,40 @@ html,body{
 .site-title h1,.site-title p{font-size:16px;display:inline-block;padding:5px 0 5px 5px;margin:0}
 .site-title h1 a{color:#fff;font-weight:700;text-decoration:none}
 
-#header .back-to-top {
-    margin: 4px 10px;
+#header .links {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px;
 }
-#header .back-to-top a {
+#header .links a {
     text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
 }
+#header .links a:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+#header .links .github-btn {
+    display: flex;
+    align-items: center;
+    background-color: #cfdff5;
+    color: #222;
+}
+#header .links .github-btn:hover {
+    background-color: #b7cff0;
+}
+#header .links .github-btn img  {
+    margin-right: 2px;
+}
+#header .links .top-btn {
+    background-color: #e0e0e0;
+    color: #222;
+}
+#header .links .top-btn:hover {
+    background-color: #ccc;
+}
+
 #header .site-title-bg {
     display: flex;
     align-items: center;
@@ -46,7 +74,7 @@ main {
     padding: 0 4%;
 }
 main.main-content {
-    width: 1400px;
+    max-width: 1400px;
     margin: 0 auto;
 } 
 
@@ -150,6 +178,19 @@ section#books {
 .book-item:last-child {
     border-bottom: 1px solid #333;
 }
+
+/* PCでは、特定のリンクだけ有効にする */
+.book-item .full-link {
+    pointer-events: none;
+}
+.book-item .icon a,
+.book-item .author dd a {
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+}
+
+
 .book-item .icon {
     width: 200px; /* 固定サイズ推奨 */
     flex-shrink: 0; /* 縮まないように */
@@ -272,8 +313,11 @@ img.aligncenter {
     body {
         overflow-x: hidden; /* 横スクロールを無効にする例 */
     }
+    #header .links .top-btn {
+        width: 40%;
+    }
     main.main-content {
-        width: 94%;
+        width: 92%;
     }
     main.main.main-content {
         padding: 0; 
@@ -287,7 +331,7 @@ img.aligncenter {
     }
 
     section#books {
-        width: 94%;
+        width: 92%;
         padding: 0 4%;
         margin-bottom: 70px;
     }
@@ -314,6 +358,19 @@ img.aligncenter {
     .book-item {
         padding: 0 6%;
     }
+
+    /* リンクを広げる */
+    .book-item {
+        position: relative;
+    }
+    .book-item .full-link {
+        pointer-events: auto;
+        position: absolute;
+        inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+        z-index: 1;
+        display: block;
+    }
+
     .book-item .icon {
         width: 40%;
     }
