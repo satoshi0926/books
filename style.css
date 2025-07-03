@@ -183,9 +183,8 @@ section#books {
 .book-item .full-link {
     pointer-events: none;
 }
-.book-item .icon a,
-.book-item .author dd a {
-    pointer-events: auto;
+.book-info a,
+.book-item  a {
     position: relative;
     z-index: 2;
 }
@@ -205,9 +204,18 @@ section#books {
     filter: brightness(1.4); /* ← 1.0 より大きいと明るくなる */
     transition: filter 0.3s ease; /* アニメーションも追加すると滑らか */
 }
+.book-item .icon a {
+    text-decoration: none;
+    color: #000;
+}
+.book-item .icon a:hover {
+    text-decoration: underline;
+    color: cadetblue;
+}
 .book-item .icon p {
     text-align: center;
 }
+
 
 .book-item .book-info {
     flex: 1; /* 残り幅いっぱい使う */
@@ -218,11 +226,11 @@ section#books {
 .book-info dl div {
     display: flex;
 }
-.book-info div.author a {
+.book-info a {
     text-decoration: none;
     color: #000;
 }
-.book-info div.author a:hover {
+.book-info a:hover {
     text-decoration: underline;
     color: cadetblue;
 }

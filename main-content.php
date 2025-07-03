@@ -73,6 +73,10 @@ $array_filter = get_array_filter($get_data);
     elseif ( get_query_var('page') ) { $paged = get_query_var('page'); }
     else { $paged = 1; }
 
+    // 現在のページのurl取得
+    $current_url = home_url( add_query_arg( null, null ) );
+    $current_url = strtok( $current_url, '?' ); // クエリを除去
+
     $args = array(
         'post_type' => 'post',        // 投稿タイプ
         'post_status'    => 'publish', // 公開中のデータ
@@ -95,7 +99,8 @@ $array_filter = get_array_filter($get_data);
             $content_type = SCF::get('content_type', $post_id);
             $content_name = SCF::get('content_name', $post_id);
             $author   = SCF::get('author', $post_id);
-            $release_date   = get_date_format_week(SCF::get('release_date', $post_id));
+            $release_date = SCF::get('release_date', $post_id);
+            $release_date_format   = get_date_format_week($release_date);
             $price   = SCF::get('price', $post_id);
             $discount = SCF::get('discount', $post_id);
 
@@ -116,19 +121,19 @@ $array_filter = get_array_filter($get_data);
                 '単行本' => 'hardcover',
                 default  => '',
             };
-            echo '<p class="'.esc_attr($content_type_style).'"><span>' . esc_html($content_type) . '</span></p>';
+            echo '<p class="'.esc_attr($content_type_style).'"><a href="'.esc_url( $current_url ).'?content_type='. esc_html($content_type).'">' . esc_html($content_type) . '</a></p>';
              echo '</div>';
 
             echo '<div class="book-info">';
             echo '<dl>';
-            echo '<div class="author"><dt>作品名:</dt><dd><a href="'.get_permalink().'">' . esc_html($content_name) . '</a></dd></div>';
-            echo '<div><dt>作者:</dt><dd>' . esc_html($author) . '</dd></div>';
+            echo '<div class="content-name"><dt>作品名:</dt><dd><a href="'.get_permalink().'">' . esc_html($content_name) . '</a></dd></div>';
+            echo '<div class="author"><dt>作者:</dt><dd><a href="'.esc_url( $current_url ).'?author='. esc_html($author).'">' . esc_html($author) . '</a></dd></div>';
 
             $the_content = get_the_content();
             $posted_text = trim_text($the_content, 150);
             echo '<div class="posted-text">'.$posted_text.'</div>';
 
-            echo '<div><dt>発売日:</dt><dd>' . esc_html($release_date) . '</dd></div>';
+            echo '<div><dt>発売日:</dt><dd><a href="'.esc_url( $current_url ).'?release_date='. esc_html($release_date).'">' . esc_html($release_date_format) . '</a></dd></div>';
 
             if (!empty($discount) && (stripos($discount, 'off') !== false)){
                 $discounted_price = calc_discounted_price($price, $discount);
